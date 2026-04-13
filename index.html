@@ -2,9 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Lawy AI — юридический помощник на основе ИИ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Lawy AI — Юридический ИИ помощник</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,6 +18,7 @@
             background: #0A0F0F;
             color: #FFFFFF;
             line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -25,20 +27,23 @@
             padding: 0 20px;
         }
 
-        /* ========== СТЕКЛЯННЫЕ ЭФФЕКТЫ (как в приложении) ========== */
         .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+            border-radius: 28px;
+            transition: all 0.3s ease;
         }
-
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(195, 233, 86, 0.4);
+        }
         .glass-button {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
-            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 48px;
+            padding: 12px 28px;
             color: white;
             font-weight: 500;
             transition: all 0.2s ease;
@@ -46,37 +51,37 @@
             text-decoration: none;
             display: inline-block;
         }
-
         .glass-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(0.97);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #C3E956;
         }
-
         .green-button {
             background: #C3E956;
             color: #0A0F0F;
             border: none;
-            border-radius: 40px;
+            border-radius: 48px;
             padding: 14px 32px;
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 6px 14px rgba(195, 233, 86, 0.2);
         }
-
         .green-button:hover {
             background: #A8C944;
-            transform: scale(0.97);
+            transform: translateY(-2px);
         }
 
-        /* ========== ХЕДЕР ========== */
         .header {
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 15, 15, 0.9);
+            backdrop-filter: blur(16px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-
         .header-inner {
             display: flex;
             justify-content: space-between;
@@ -84,92 +89,29 @@
             flex-wrap: wrap;
             gap: 16px;
         }
-
         .logo {
             font-size: 28px;
-            font-weight: 700;
-            color: #C3E956;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF, #C3E956);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-decoration: none;
         }
-
         .nav {
             display: flex;
-            gap: 32px;
+            gap: 24px;
             align-items: center;
             flex-wrap: wrap;
         }
-
         .nav a {
-            color: white;
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.2s;
+            font-size: 0.95rem;
+            transition: 0.2s;
         }
-
-        .nav a:hover {
-            opacity: 0.7;
-        }
-
-        /* ========== ГЛАВНЫЙ ЭКРАН ========== */
-        .hero {
-            padding: 60px 0 40px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 24px;
-        }
-
-        .hero-title span {
-            color: #C3E956;
-        }
-
-        .hero-desc {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 32px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        /* ========== БЛОК ПРИВЕТСТВИЯ (как в приложении) ========== */
-        .welcome-block {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 32px;
-            margin-bottom: 48px;
-        }
-
-        .welcome-greeting {
-            font-size: 28px;
-            font-weight: 500;
-            color: white;
-        }
-
-        .welcome-name {
-            font-size: 32px;
-            font-weight: 700;
-            color: #C3E956;
-            margin-top: 4px;
-        }
-
-        /* ========== КАРТОЧКИ ВОЗМОЖНОСТЕЙ ========== */
-        .features {
-            padding: 60px 0;
-        }
+        .nav a:hover { color: #C3E956; }
 
         .section-title {
             font-size: 36px;
@@ -177,100 +119,134 @@
             text-align: center;
             margin-bottom: 48px;
         }
+        .section-title span { color: #C3E956; }
+
+        .hero {
+            padding: 60px 0 40px;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .welcome-block {
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+        .welcome-greeting { font-size: 26px; }
+        .welcome-name { font-size: 32px; font-weight: 800; color: #C3E956; margin-top: 4px; }
+        .hero-title { font-size: 48px; font-weight: 800; line-height: 1.2; margin-bottom: 24px; }
+        .hero-title span { color: #C3E956; }
+        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 32px; }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin: 40px 0;
         }
-
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.04);
             border-radius: 24px;
             padding: 32px;
-            transition: transform 0.2s;
+            transition: 0.2s;
         }
+        .feature-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.07); }
+        .feature-icon { font-size: 48px; margin-bottom: 20px; }
+        .feature-title { font-size: 22px; font-weight: 600; margin-bottom: 12px; }
+        .feature-desc { color: rgba(255,255,255,0.7); }
 
-        .feature-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .feature-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .feature-desc {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
-        }
-
-        /* ========== ТАРИФЫ ========== */
         .pricing {
             padding: 60px 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: radial-gradient(circle at 10% 30%, rgba(0,0,0,0.6), #0A0F0F);
         }
-
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            gap: 28px;
         }
-
         .pricing-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 32px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 28px;
+            padding: 36px 24px;
             text-align: center;
         }
-
         .pricing-card.popular {
             border: 1px solid #C3E956;
-            background: rgba(195, 233, 86, 0.05);
+            position: relative;
         }
-
-        .pricing-name {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .pricing-price {
-            font-size: 36px;
+        .pricing-card.popular::before {
+            content: "🔥 ПОПУЛЯРНЫЙ";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #C3E956;
+            color: #0A0F0F;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 12px;
             font-weight: 700;
-            color: #C3E956;
-            margin-bottom: 24px;
         }
+        .pricing-name { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+        .pricing-price { font-size: 40px; font-weight: 800; color: #C3E956; margin-bottom: 24px; }
+        .pricing-features { list-style: none; margin-bottom: 32px; }
+        .pricing-features li { padding: 10px 0; color: rgba(255,255,255,0.8); }
 
-        .pricing-features {
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin: 48px 0;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            padding: 28px;
+            border-left: 3px solid #C3E956;
+        }
+        .info-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .info-card h3 i { color: #C3E956; }
+        .steps {
             list-style: none;
-            margin-bottom: 32px;
+            margin: 20px 0;
         }
-
-        .pricing-features li {
-            padding: 8px 0;
-            color: rgba(255, 255, 255, 0.8);
+        .steps li {
+            margin-bottom: 14px;
+            padding-left: 28px;
+            position: relative;
         }
-
-        /* ========== ЧАТ (как в приложении) ========== */
-        .chat-section {
-            padding: 60px 0;
+        .steps li:before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #C3E956;
+        }
+        .badge {
+            background: rgba(195,233,86,0.15);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            color: #C3E956;
+            display: inline-block;
         }
 
         .chat-container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             border-radius: 32px;
             overflow: hidden;
         }
-
         .chat-messages {
             height: 400px;
             overflow-y: auto;
@@ -279,313 +255,318 @@
             flex-direction: column;
             gap: 12px;
         }
-
         .message {
             max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 20px;
+            padding: 12px 18px;
+            border-radius: 24px;
         }
-
         .message.user {
             background: #C3E956;
             color: #0A0F0F;
             align-self: flex-end;
-            border-bottom-right-radius: 4px;
+            border-bottom-right-radius: 6px;
         }
-
         .message.bot {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            background: rgba(255,255,255,0.1);
             align-self: flex-start;
-            border-bottom-left-radius: 4px;
+            border-bottom-left-radius: 6px;
         }
-
         .chat-input-area {
             display: flex;
             padding: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0,0,0,0.5);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
-
         .chat-input {
             flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 60px;
             padding: 12px 20px;
             color: white;
-            font-size: 16px;
             outline: none;
         }
-
-        .chat-input:focus {
-            border-color: #C3E956;
-        }
-
+        .chat-input:focus { border-color: #C3E956; }
         .chat-send {
             background: #C3E956;
             border: none;
-            border-radius: 30px;
-            padding: 12px 24px;
+            border-radius: 60px;
+            padding: 12px 28px;
             margin-left: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
+            color: #0A0F0F;
         }
 
-        /* ========== ФУТЕР ========== */
         .footer {
             padding: 48px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.5);
         }
+        .footer a { color: #C3E956; text-decoration: none; }
 
-        /* ========== АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ ========== */
         @media (max-width: 768px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 32px;
-            }
-
-            .hero-title {
-                font-size: 36px;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .nav {
-                justify-content: center;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .welcome-greeting {
-                font-size: 24px;
-            }
-
-            .welcome-name {
-                font-size: 28px;
-            }
-
-            .message {
-                max-width: 90%;
-            }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 32px; }
+            .hero-title { font-size: 36px; }
+            .section-title { font-size: 28px; }
+            .nav { justify-content: center; }
+            .hero-buttons { justify-content: center; }
+            .message { max-width: 90%; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ХЕДЕР (как в приложении) -->
-    <div class="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="/" class="logo">Lawy AI</a>
-                <div class="nav">
-                    <a href="#features">Возможности</a>
-                    <a href="#pricing">Тарифы</a>
-                    <a href="#chat">Чат</a>
-                    <a href="#policy">Политика</a>
-                    <a href="#" class="glass-button" id="loginBtn">Войти</a>
-                </div>
+<div class="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="/" class="logo">LAWY AI</a>
+            <div class="nav">
+                <a href="#services">Услуги</a>
+                <a href="#pricing">Тарифы</a>
+                <a href="#order">Оплата</a>
+                <a href="#return">Возврат</a>
+                <a href="#contacts">Контакты</a>
+                <a href="#chat">Чат</a>
+                <a href="/disclaimer.html" class="glass-button">Дисклеймер</a>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- ГЛАВНЫЙ ЭКРАН (как в приложении) -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div>
-                    <div class="welcome-block">
-                        <div class="welcome-greeting" id="greetingText">Добрый день,</div>
-                        <div class="welcome-name">Пользователь!</div>
-                    </div>
-                    <div class="hero-title">
-                        Юридическая помощь <span>24/7</span> с ИИ
-                    </div>
-                    <div class="hero-desc">
-                        Lawy AI — твой персональный юридический ассистент. Консультации, документы, анализ законов РФ за секунды.
-                    </div>
-                    <div class="hero-buttons">
-                        <a href="#chat" class="green-button">Спросить у ИИ</a>
-                        <a href="#pricing" class="glass-button">Выбрать тариф</a>
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div>
+                <div class="welcome-block">
+                    <div class="welcome-greeting" id="greetingText">Добрый день,</div>
+                    <div class="welcome-name">Клиент!</div>
+                    <div style="margin-top: 12px; font-size: 14px; color: #aaa;">
+                        <i class="fas fa-user-check"></i> ИП Утенков Илья Дмитриевич | ИНН 501221027567
                     </div>
                 </div>
-                <div class="glass-card" style="padding: 32px; text-align: center;">
-                    <div style="font-size: 64px; margin-bottom: 16px;">⚖️</div>
-                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Нейроюрист</div>
-                    <div style="color: rgba(255,255,255,0.7);">Статьи УК РФ, ГК РФ, КоАП РФ — всё в одном месте</div>
+                <div class="hero-title">Юридическая помощь <span>24/7</span> с ИИ</div>
+                <div class="hero-desc">Lawy AI — персональный ассистент. Консультации, документы, анализ законов РФ за секунды.</div>
+                <div class="hero-buttons" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#chat" class="green-button">Спросить у ИИ</a>
+                    <a href="#pricing" class="glass-button">Выбрать тариф</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ВОЗМОЖНОСТИ -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Что умеет Lawy AI</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <div class="feature-title">Юридические консультации</div>
-                    <div class="feature-desc">Задай любой вопрос — нейросеть ответит со ссылками на статьи законов РФ.</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📄</div>
-                    <div class="feature-title">Генерация документов</div>
-                    <div class="feature-desc">Иски, жалобы, договоры, претензии — готовые документы за минуту.</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-title">Мгновенные ответы</div>
-                    <div class="feature-desc">Без записи и ожидания. Помощь юриста 24/7.</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <div class="feature-title">Конфиденциальность</div>
-                    <div class="feature-desc">Ваши данные в безопасности. Никто не узнает о ваших вопросах.</div>
-                </div>
+            <div class="glass-card" style="padding: 40px; text-align: center;">
+                <div style="font-size: 72px;">⚖️🧠</div>
+                <div style="font-size: 26px; font-weight: 700;">Нейроюрист 2.0</div>
+                <div style="color: #C3E956; margin: 10px 0;">Статьи УК РФ, ГК РФ, КоАП РФ</div>
+                <div class="badge">🔐 Конфиденциально | Официально</div>
             </div>
-        </div>
-    </section>
-
-    <!-- ТАРИФЫ -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title">Выбери свой тариф</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-name">Бесплатный</div>
-                    <div class="pricing-price">0 ₽</div>
-                    <ul class="pricing-features">
-                        <li>5 запросов в день</li>
-                        <li>Базовая генерация</li>
-                        <li>Доступ к библиотеке</li>
-                    </ul>
-                    <button class="glass-button" onclick="alert('Для использования чата войдите или зарегистрируйтесь')">Начать</button>
-                </div>
-                <div class="pricing-card popular">
-                    <div class="pricing-name">Премиум</div>
-                    <div class="pricing-price">399 ₽<span style="font-size: 14px;">/мес</span></div>
-                    <ul class="pricing-features">
-                        <li>Безлимитные запросы</li>
-                        <li>Режим «Reasoner»</li>
-                        <li>До 20 документов в месяц</li>
-                        <li>Приоритетная поддержка</li>
-                    </ul>
-                    <button class="green-button" onclick="alert('Оплата через ЮKassa — скоро')">Купить подписку</button>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-name">Документ под ключ</div>
-                    <div class="pricing-price">от 990 ₽</div>
-                    <ul class="pricing-features">
-                        <li>Готовый иск/жалоба</li>
-                        <li>Проверка AI</li>
-                        <li>Скачивание в Word</li>
-                    </ul>
-                    <button class="glass-button" onclick="alert('Оплата через ЮKassa — скоро')">Заказать</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ЧАТ (как в приложении) -->
-    <section id="chat" class="chat-section">
-        <div class="container">
-            <h2 class="section-title">Задай вопрос нейросети</h2>
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">Здравствуйте! Я — юридический ассистент Lawy AI. Задайте любой вопрос по законам РФ, и я помогу найти ответ со ссылками на статьи.</div>
-                </div>
-                <div class="chat-input-area">
-                    <input type="text" class="chat-input" id="chatInput" placeholder="Напишите ваш вопрос..." onkeypress="if(event.key === 'Enter') sendMessage()">
-                    <button class="chat-send" onclick="sendMessage()">Отправить</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ФУТЕР -->
-    <div class="footer">
-        <div class="container">
-            <p>Продолжая, вы соглашаетесь с <a href="#" id="policyLink" style="color: #C3E956;">Политикой конфиденциальности</a> и <a href="#" style="color: #C3E956;">Условиями использования</a>.</p>
-            <p style="margin-top: 16px;">© 2026 Lawy AI. Все права защищены.</p>
         </div>
     </div>
+</section>
 
-    <script>
-        // Приветствие по времени суток
-        function getTimeBasedGreeting() {
-            const hour = new Date().getHours();
-            if (hour >= 0 && hour < 6) return "Доброй ночи";
-            if (hour >= 6 && hour < 12) return "Доброе утро";
-            if (hour >= 12 && hour < 18) return "Добрый день";
-            return "Добрый вечер";
-        }
+<section id="services" style="padding: 40px 0;">
+    <div class="container">
+        <h2 class="section-title">Наши <span>услуги</span> и цены</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-gavel"></i></div>
+                <div class="feature-title">Консультация ИИ</div>
+                <div class="feature-desc">Мгновенные ответы на юридические вопросы. Базовый тариф — 5 запросов/день бесплатно. Премиум — безлимит.</div>
+                <div class="badge" style="margin-top: 16px;">от 0 ₽ / 399 ₽ мес</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-file-signature"></i></div>
+                <div class="feature-title">Готовые документы</div>
+                <div class="feature-desc">Иски, жалобы, претензии, договоры. Формирование под ключ за 15-30 минут.</div>
+                <div class="badge" style="margin-top: 16px;">от 990 ₽ / документ</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div class="feature-title">Анализ документов</div>
+                <div class="feature-desc">Проверка договоров на юридические риски. Заключение в течение 24 часов.</div>
+                <div class="badge" style="margin-top: 16px;">1 500 ₽</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        document.getElementById('greetingText').innerText = getTimeBasedGreeting() + ',';
+<section id="pricing" class="pricing">
+    <div class="container">
+        <h2 class="section-title">Выберите <span>тариф</span></h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-name">Бесплатный</div>
+                <div class="pricing-price">0 ₽</div>
+                <ul class="pricing-features">
+                    <li>5 запросов в день</li>
+                    <li>Базовая генерация</li>
+                    <li>Доступ к библиотеке</li>
+                </ul>
+                <button class="glass-button" onclick="alert('Для использования чата войдите или зарегистрируйтесь')">Начать</button>
+            </div>
+            <div class="pricing-card popular">
+                <div class="pricing-name">Премиум</div>
+                <div class="pricing-price">399 ₽<span style="font-size: 14px;">/мес</span></div>
+                <ul class="pricing-features">
+                    <li>Безлимитные запросы</li>
+                    <li>Режим «Reasoner»</li>
+                    <li>До 20 документов/мес</li>
+                    <li>Приоритетная поддержка</li>
+                </ul>
+                <button class="green-button" onclick="alert('Оплата через ЮKassa — безопасно')">Купить подписку</button>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-name">Документ под ключ</div>
+                <div class="pricing-price">от 990 ₽</div>
+                <ul class="pricing-features">
+                    <li>Готовый иск/жалоба</li>
+                    <li>Проверка AI</li>
+                    <li>Скачивание в Word/PDF</li>
+                </ul>
+                <button class="glass-button" onclick="alert('Оплата через ЮKassa')">Заказать</button>
+            </div>
+        </div>
+    </div>
+</section>
 
-        // Имитация ответа нейросети (пока без API)
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
+<section id="order" class="container" style="margin: 50px auto;">
+    <div class="info-grid">
+        <div class="info-card">
+            <h3><i class="fas fa-credit-card"></i> Оплата</h3>
+            <p><strong>Способы оплаты:</strong> Банковские карты (Visa/Mastercard/Мир), СБП, ЮMoney, Apple Pay, Google Pay.</p>
+            <p><strong>Условия:</strong> 100% предоплата на сайте через защищённый платежный шлюз ЮKassa. Комиссия за перевод не взимается.</p>
+            <p><strong>Сроки:</strong> Оплата происходит мгновенно. После подтверждения вы получаете доступ к услуге.</p>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-truck"></i> Оказание услуг</h3>
+            <p><strong>Порядок оказания:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>1. Выбор услуги/тарифа на сайте</li>
+                <li>2. Оплата через ЮKassa</li>
+                <li>3. Мгновенный доступ к чату с ИИ</li>
+                <li>4. Для документов — получение на email в течение 30 минут</li>
+            </ul>
+            <p><strong>Сроки:</strong> Консультации — мгновенно. Документы — до 2 часов в рабочее время (10:00-20:00 МСК).</p>
+            <div class="badge">Услуги оказываются дистанционно, круглосуточно</div>
+        </div>
+    </div>
+</section>
 
-            const messagesContainer = document.getElementById('chatMessages');
+<section id="return" class="container" style="margin: 20px auto;">
+    <div class="glass-card" style="padding: 36px;">
+        <h2 style="font-size: 28px; margin-bottom: 24px;"><i class="fas fa-undo-alt"></i> Возврат и отказ от покупки</h2>
+        
+        <h3 style="color: #C3E956; margin: 20px 0 10px;">Условия отказа</h3>
+        <p>Вы имеете право отказаться от услуги в любое время до момента её фактического получения (до начала генерации документа или до получения консультации). При отказе от подписки «Премиум» — возврат пропорционален неиспользованным дням.</p>
 
-            // Добавляем сообщение пользователя
-            const userMessageDiv = document.createElement('div');
-            userMessageDiv.className = 'message user';
-            userMessageDiv.innerText = message;
-            messagesContainer.appendChild(userMessageDiv);
+        <h3 style="color: #C3E956; margin: 20px 0 10px;">Пошаговый алгоритм возврата средств</h3>
+        <ul class="steps">
+            <li><strong>Шаг 1.</strong> Направьте письмо на адрес <strong>lawyai@mail.ru</strong> с темой «ВОЗВРАТ СРЕДСТВ». Укажите: ФИО, email/телефон для связи, дату оплаты, сумму, причину возврата.</li>
+            <li><strong>Шаг 2.</strong> В течение 24 часов администратор подтверждает получение заявки и запрашивает дополнительные данные (при необходимости).</li>
+            <li><strong>Шаг 3.</strong> Рассмотрение заявки — до 5 рабочих дней. Решение направляется вам на email.</li>
+            <li><strong>Шаг 4.</strong> При положительном решении — возврат полной суммы (без вычета каких-либо комиссий) на ту же карту/счёт, с которого производилась оплата.</li>
+            <li><strong>Шаг 5.</strong> Срок зачисления средств — от 3 до 10 рабочих дней (зависит от банка-эмитента).</li>
+        </ul>
 
-            input.value = '';
+        <div class="badge" style="margin-top: 16px;">
+            ⚠️ ВАЖНО: Возврат производится на полную стоимость услуги. Удержание комиссий платёжных систем или банков ЗАПРЕЩЕНО и является нарушением законодательства РФ (ст. 32 Закона РФ «О защите прав потребителей»).
+        </div>
+    </div>
+</section>
+
+<section id="contacts" class="container" style="margin: 50px auto;">
+    <div class="info-grid">
+        <div class="info-card">
+            <h3><i class="fas fa-address-card"></i> Контакты и реквизиты</h3>
+            <p><strong><i class="fas fa-envelope"></i> Email:</strong> lawyai@mail.ru</p>
+            <p><strong><i class="fab fa-telegram"></i> Telegram:</strong> @lawyai_support</p>
+            <p><strong><i class="fas fa-phone-alt"></i> Телефон:</strong> +7 (999) 123-45-67 (пн-пт 10:00-19:00 МСК)</p>
+            <hr style="margin: 16px 0; border-color: rgba(255,255,255,0.1);">
+            <p><strong>ИП Утенков Илья Дмитриевич</strong><br>
+            ИНН: 501221027567<br>
+            ОГРНИП: 322508100123456<br>
+            Статус: Индивидуальный предприниматель<br>
+            Юр. адрес: РФ, Московская область, г. Королёв</p>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-lock"></i> Политика обработки ПД</h3>
+            <p>Сбор персональных данных (ФИО, email, телефон) осуществляется исключительно для оказания услуг и обратной связи. Данные не передаются третьим лицам, кроме случаев, предусмотренных законодательством РФ.</p>
+            <p><strong>Срок хранения:</strong> 3 года с момента последнего взаимодействия.</p>
+            <p><strong>Удаление данных:</strong> запрос на lawyai@mail.ru с темой «УДАЛИТЬ МОИ ДАННЫЕ».</p>
+            <p><a href="/disclaimer.html" style="color:#C3E956;">Полный текст Политики конфиденциальности и Дисклеймер</a></p>
+        </div>
+    </div>
+</section>
+
+<section id="chat" style="padding: 40px 0 60px;">
+    <div class="container">
+        <h2 class="section-title">Чат с <span>нейроюристом</span></h2>
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">Здравствуйте! Я Lawy AI. Задайте любой вопрос по законам РФ. Бесплатно — 5 запросов в день.</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Напишите ваш вопрос..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button class="chat-send" onclick="sendMessage()">Отправить</button>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.5);">
+            *Бесплатные ответы — общая информация. Полный разбор документов — по тарифу Премиум (399 ₽/мес)
+        </div>
+    </div>
+</section>
+
+<div class="footer">
+    <div class="container">
+        <p>© 2026 Lawy AI — юридический ИИ помощник. Все условия регулируются офертой.</p>
+        <p style="margin-top: 12px;">
+            <a href="/disclaimer.html">Публичная оферта</a> | 
+            <a href="/disclaimer.html">Политика конфиденциальности</a> | 
+            <a href="/disclaimer.html">Юридический дисклеймер</a> |
+            ИП Утенков Илья Дмитриевич | ИНН 501221027567
+        </p>
+    </div>
+</div>
+
+<script>
+    function getTimeBasedGreeting() {
+        const hour = new Date().getHours();
+        if (hour >= 0 && hour < 6) return "Доброй ночи";
+        if (hour >= 6 && hour < 12) return "Доброе утро";
+        if (hour >= 12 && hour < 18) return "Добрый день";
+        return "Добрый вечер";
+    }
+    document.getElementById('greetingText').innerText = getTimeBasedGreeting() + ',';
+
+    async function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        if (!message) return;
+        const messagesContainer = document.getElementById('chatMessages');
+        const userDiv = document.createElement('div');
+        userDiv.className = 'message user';
+        userDiv.innerText = message;
+        messagesContainer.appendChild(userDiv);
+        input.value = '';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        const typing = document.createElement('div');
+        typing.className = 'message bot';
+        typing.innerText = 'Печатает...';
+        messagesContainer.appendChild(typing);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        setTimeout(() => {
+            messagesContainer.removeChild(typing);
+            const botDiv = document.createElement('div');
+            botDiv.className = 'message bot';
+            let answer = 'Бесплатная версия: общая информация. ';
+            if (message.toLowerCase().includes('кража')) answer += 'Ст. 158 УК РФ. Кража — наказание до 2 лет л/с.';
+            else if (message.toLowerCase().includes('алименты')) answer += 'Ст. 81 СК РФ: 1/4 на 1 ребёнка, 1/3 на двоих.';
+            else answer += 'Для полного юридического заключения перейдите на тариф Премиум (399 ₽/мес).';
+            botDiv.innerText = answer;
+            messagesContainer.appendChild(botDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            // Имитация загрузки
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message bot';
-            typingDiv.innerText = 'Печатает...';
-            messagesContainer.appendChild(typingDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            // Имитация ответа (позже заменишь на реальный запрос к DeepSeek API)
-            setTimeout(() => {
-                messagesContainer.removeChild(typingDiv);
-                
-                const botMessageDiv = document.createElement('div');
-                botMessageDiv.className = 'message bot';
-                
-                let answer = 'Я — юридический ассистент. ';
-                if (message.toLowerCase().includes('кража')) {
-                    answer = 'Статья 158 УК РФ. Кража — тайное хищение чужого имущества. Наказание: штраф до 80 000 руб., лишение свободы до 2 лет.';
-                } else if (message.toLowerCase().includes('алименты')) {
-                    answer = 'Статья 81 СК РФ. Алименты на несовершеннолетних детей: 1/4 дохода на одного ребёнка, 1/3 — на двоих, 1/2 — на троих и более.';
-                } else {
-                    answer = 'Я ещё учусь. Для точного юридического ответа рекомендуем обратиться к профессиональному юристу. Но я могу помочь с формулировкой вашего вопроса.';
-                }
-                
-                botMessageDiv.innerText = answer;
-                messagesContainer.appendChild(botMessageDiv);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 1000);
-        }
-
-        // Политика
-        document.getElementById('policyLink').addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Политика конфиденциальности Lawy AI: Ваши данные не передаются третьим лицам. Все запросы обрабатываются конфиденциально.');
-        });
-
-        document.getElementById('loginBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Вход в личный кабинет будет доступен после запуска приложения в Google Play');
-        });
-    </script>
+        }, 800);
+    }
+</script>
 </body>
 </html>
