@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Правовая информация — Lawy AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0F0F;
+            color: #FFFFFF;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Стеклянная карточка как в приложении */
+        .glass-doc {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-doc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(195,233,86,0), #C3E956, rgba(195,233,86,0));
+        }
+
+        .scroll-content {
+            max-height: 65vh;
+            overflow-y: auto;
+            padding: 28px;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scroll-content::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: #C3E956;
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #C3E956;
+            margin: 20px 0 12px 0;
+            letter-spacing: -0.3px;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .paragraph {
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 14px;
+        }
+
+        .warning-text {
+            background: rgba(195, 233, 86, 0.1);
+            border-left: 3px solid #C3E956;
+            padding: 16px;
+            border-radius: 16px;
+            margin: 20px 0;
+            font-weight: 600;
+            color: #FFD966;
+            font-size: 14px;
+        }
+
+        .badge-light {
+            background: rgba(255,255,255,0.08);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #C3E956;
+        }
+
+        /* Чекбокс и кнопка */
+        .accept-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 16px;
+            padding: 12px 0;
+        }
+
+        .checkbox-custom {
+            width: 22px;
+            height: 22px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .checkbox-custom.checked {
+            background: #C3E956;
+            border-color: #C3E956;
+        }
+
+        .checkbox-custom.checked::after {
+            content: '✓';
+            color: #0A0F0F;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .checkbox-custom.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .accept-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .accept-text strong {
+            color: #C3E956;
+        }
+
+        .green-button-full {
+            background: #C3E956;
+            color: #0A0F0F;
+            border: none;
+            border-radius: 60px;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .green-button-full:hover {
+            background: #A8C944;
+            transform: translateY(-2px);
+        }
+
+        .green-button-full.disabled {
+            background: rgba(195, 233, 86, 0.4);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        a {
+            color: #C3E956;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Заголовок страницы -->
+    <div style="margin-bottom: 20px;">
+        <a href="/" style="color: #C3E956; font-size: 14px;"><i class="fas fa-arrow-left"></i> На главную</a>
+        <h1 style="font-size: 28px; margin-top: 12px; font-weight: 700;">Правовая информация</h1>
+    </div>
+
+    <!-- Стеклянный документ -->
+    <div class="glass-doc">
+        <div class="scroll-content" id="scrollContent">
+            <div class="badge-light">ОФИЦИАЛЬНАЯ ДОКУМЕНТАЦИЯ И ЮРИДИЧЕСКИЙ ДИСКЛЕЙМЕР</div>
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">к программному продукту «Правовик»</h2>
+            <p class="paragraph"><strong>Дата составления:</strong> 09 января 2026 г.<br>
+            <strong>Разработчик и правообладатель:</strong> Утенков Илья Дмитриевич (Pelko)</p>
+
+            <!-- 1. Общие положения -->
+            <div class="section-title">1. Общие положения</div>
+            <p class="paragraph">1.1. Настоящий документ представляет собой официальную юридическую документацию и дисклеймер, регулирующий правовой статус, условия использования и ограничения ответственности, связанные с программным продуктом под наименованием «Правовик» (далее — Продукт).</p>
+            <p class="paragraph">1.2. Документ составлен в соответствии с положениями Гражданского кодекса Российской Федерации (части первая и четвёртая), Федерального закона от 27 июля 2006 г. № 149-ФЗ «Об информации, информационных технологиях и о защите информации», Федерального закона от 31 мая 2002 г. № 63-ФЗ «Об адвокатской деятельности и адвокатуре в Российской Федерации», а также с учётом сложившейся судебной практики, в том числе Постановлений Пленума Верховного Суда РФ.</p>
+            <p class="paragraph">1.3. Настоящий документ обязателен для ознакомления всеми лицами, использующими Продукт в любых целях, и считается принятым с момента первого запуска или доступа к функционалу Продукта.</p>
+
+            <!-- 2. Правовой статус разработчика -->
+            <div class="section-title">2. Правовой статус разработчика</div>
+            <p class="paragraph">2.1. Единственным разработчиком и правообладателем Продукта является физическое лицо — Утенков Илья Дмитриевич, действующий под псевдонимом «Pelko».</p>
+            <p class="paragraph">2.2. Утенков Илья Дмитриевич не является адвокатом, не состоит в коллегии адвокатов, не имеет статуса ИП или юрлица, не имеет лицензии на оказание юридических услуг.</p>
+            <p class="paragraph">2.3. Действия разработчика не подпадают под определение «оказание юридической помощи» в смысле Федерального закона № 63-ФЗ.</p>
+
+            <!-- 3. Назначение и ограничения -->
+            <div class="section-title">3. Назначение и ограничения Продукта</div>
+            <p class="paragraph">3.1. Продукт предназначен исключительно для предоставления публично доступных текстов нормативных актов и систематизации информации.</p>
+            <p class="paragraph">3.2. Продукт не предназначен для формирования юридической стратегии, анализа конкретных обстоятельств дела или замены квалифицированной юридической помощи.</p>
+            <p class="paragraph">3.3. Информация носит обобщённый, справочный и ознакомительный характер.</p>
+
+            <!-- 4. Отказ от ответственности -->
+            <div class="section-title">4. Отказ от ответственности</div>
+            <p class="paragraph">4.1. Разработчик не несёт ответственности за убытки, упущенную выгоду, отказ суда принять документы, пропуск процессуальных сроков и иные последствия использования Продукта.</p>
+            <p class="paragraph">4.2. Пользователь использует Продукт на свой страх и риск.</p>
+            <p class="paragraph">4.3. Вред подлежит возмещению только при доказанной вине разработчика. Разработчик заявляет об отсутствии такой вины.</p>
+
+            <!-- Важное предупреждение -->
+            <div class="warning-text">
+                ⚠️ ВНИМАНИЕ: Продукт не является юридической консультацией и не заменяет профессионального адвоката. Любые решения должны быть согласованы с квалифицированным юристом.
+            </div>
+
+            <!-- 5. Интеллектуальная собственность -->
+            <div class="section-title">5. Интеллектуальная собственность</div>
+            <p class="paragraph">5.1. Все исключительные права на Продукт принадлежат Утенкову Илье Дмитриевичу.</p>
+            <p class="paragraph">5.2. Использование Продукта допускается только в личных некоммерческих целях.</p>
+            <p class="paragraph">5.3. Любое воспроизведение, распространение, модификация без согласия правообладателя является нарушением авторских прав.</p>
+
+            <!-- 6. Рекомендации -->
+            <div class="section-title">6. Рекомендации по использованию</div>
+            <p class="paragraph">6.1. Перед подачей документов в суд или иные органы рекомендуется обратиться к адвокату.</p>
+            <p class="paragraph">6.2. Не использовать материалы Продукта как основу для защиты в уголовном процессе.</p>
+            <p class="paragraph">6.3. Проверять актуальность норм через официальные источники.</p>
+
+            <!-- 7. Заключительные положения -->
+            <div class="section-title">7. Заключительные положения</div>
+            <p class="paragraph">7.1. Документ вступает в силу с 09.01.2026 и действует бессрочно.</p>
+            <p class="paragraph">7.2. Разработчик вправе вносить изменения без уведомления.</p>
+            <p class="paragraph">7.3. Использование Продукта после изменений означает принятие новых условий.</p>
+            <p class="paragraph">7.4. Документ имеет юридическую силу, равнозначную письменной форме.</p>
+            <p class="paragraph">7.5. Споры разрешаются по законодательству РФ.</p>
+
+            <!-- 8. Контакты -->
+            <div class="section-title">8. Контактная информация</div>
+            <p class="paragraph">8.1. Запросы направлять по электронной почте: lawyai@mail.ru</p>
+            <p class="paragraph">8.2. Направление запроса не влечёт установления адвокатско-клиентских отношений.</p>
+
+            <!-- 9. Подтверждение -->
+            <div class="section-title">9. Подтверждение пользователя</div>
+            <p class="paragraph">9.1. Использование Продукта означает, что пользователь ознакомился с документом, понимает, что разработчик не является адвокатом, принимает все риски и освобождает разработчика от ответственности.</p>
+            <p class="paragraph">9.2. Подтверждение имеет юридическую силу.</p>
+
+            <p class="paragraph" style="margin-top: 20px;">© 2026 Утенков Илья Дмитриевич (Pelko). Все права защищены.</p>
+            <p class="paragraph">Данный документ носит информационный характер.</p>
+        </div>
+    </div>
+
+    <!-- Чекбокс и кнопка принятия -->
+    <div class="accept-row">
+        <div class="checkbox-custom" id="checkbox"></div>
+        <div class="accept-text">
+            Я принимаю условия <strong>Политики конфиденциальности и Дисклеймера</strong>
+        </div>
+    </div>
+
+    <button class="green-button-full" id="acceptBtn">Принять и продолжить</button>
+    <div class="footer-note">
+        <i class="fas fa-shield-alt"></i> Документ имеет юридическую силу, равнозначную письменной форме
+    </div>
+</div>
+
+<script>
+    const scrollElement = document.getElementById('scrollContent');
+    const checkbox = document.getElementById('checkbox');
+    const acceptBtn = document.getElementById('acceptBtn');
+
+    let isAtBottom = false;
+    let isChecked = false;
+
+    // Проверка, доскроллил ли пользователь до конца
+    function checkScrollBottom() {
+        const scrollTop = scrollElement.scrollTop;
+        const scrollHeight = scrollElement.scrollHeight;
+        const clientHeight = scrollElement.clientHeight;
+        
+        // Если высота контента больше видимой области и прокручено почти до конца
+        if (scrollHeight > clientHeight) {
+            isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 30);
+        } else {
+            // Если контент помещается без скролла, считаем что пользователь "увидел" всё
+            isAtBottom = true;
+        }
+        
+        updateCheckboxState();
+    }
+
+    function updateCheckboxState() {
+        // Если не доскроллили — делаем чекбокс неактивным и снимаем галочку
+        if (!isAtBottom) {
+            checkbox.classList.add('disabled');
+            isChecked = false;
+            checkbox.classList.remove('checked');
+        } else {
+            checkbox.classList.remove('disabled');
+            // Но при этом не меняем автоматически isChecked — пользователь должен сам кликнуть
+        }
+        updateButtonState();
+    }
+
+    function updateButtonState() {
+        if (isAtBottom && isChecked) {
+            acceptBtn.classList.remove('disabled');
+            acceptBtn.disabled = false;
+        } else {
+            acceptBtn.classList.add('disabled');
+            acceptBtn.disabled = true;
+        }
+    }
+
+    // Обработка клика по чекбоксу (только если активен)
+    checkbox.addEventListener('click', () => {
+        if (!isAtBottom) {
+            alert('Пожалуйста, прокрутите документ до конца, чтобы ознакомиться со всеми условиями.');
+            return;
+        }
+        isChecked = !isChecked;
+        if (isChecked) {
+            checkbox.classList.add('checked');
+        } else {
+            checkbox.classList.remove('checked');
+        }
+        updateButtonState();
+    });
+
+    // Принятие и переход на главную
+    acceptBtn.addEventListener('click', () => {
+        if (acceptBtn.disabled) return;
+        if (isAtBottom && isChecked) {
+            // Перенаправляем на главную страницу сайта
+            window.location.href = '/';
+        } else {
+            alert('Необходимо прокрутить документ до конца и принять условия.');
+        }
+    });
+
+    // Слушаем скролл
+    scrollElement.addEventListener('scroll', checkScrollBottom);
+    // Проверить при загрузке
+    setTimeout(checkScrollBottom, 100);
+    window.addEventListener('resize', checkScrollBottom);
+</script>
+
+</body>
+</html>
