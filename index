@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lawy AI — юридический помощник на основе ИИ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0F0F;
+            color: #FFFFFF;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== СТЕКЛЯННЫЕ ЭФФЕКТЫ (как в приложении) ========== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(0.97);
+        }
+
+        .green-button {
+            background: #C3E956;
+            color: #0A0F0F;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .green-button:hover {
+            background: #A8C944;
+            transform: scale(0.97);
+        }
+
+        /* ========== ХЕДЕР ========== */
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #C3E956;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* ========== ГЛАВНЫЙ ЭКРАН ========== */
+        .hero {
+            padding: 60px 0 40px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero-title span {
+            color: #C3E956;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== БЛОК ПРИВЕТСТВИЯ (как в приложении) ========== */
+        .welcome-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 48px;
+        }
+
+        .welcome-greeting {
+            font-size: 28px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .welcome-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #C3E956;
+            margin-top: 4px;
+        }
+
+        /* ========== КАРТОЧКИ ВОЗМОЖНОСТЕЙ ========== */
+        .features {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 32px;
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        /* ========== ТАРИФЫ ========== */
+        .pricing {
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .pricing-card.popular {
+            border: 1px solid #C3E956;
+            background: rgba(195, 233, 86, 0.05);
+        }
+
+        .pricing-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #C3E956;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ========== ЧАТ (как в приложении) ========== */
+        .chat-section {
+            padding: 60px 0;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 20px;
+        }
+
+        .message.user {
+            background: #C3E956;
+            color: #0A0F0F;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.bot {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #C3E956;
+        }
+
+        .chat-send {
+            background: #C3E956;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 24px;
+            margin-left: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ========== ФУТЕР ========== */
+        .footer {
+            padding: 48px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ========== АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ ========== */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 32px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .welcome-greeting {
+                font-size: 24px;
+            }
+
+            .welcome-name {
+                font-size: 28px;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ХЕДЕР (как в приложении) -->
+    <div class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo">Lawy AI</a>
+                <div class="nav">
+                    <a href="#features">Возможности</a>
+                    <a href="#pricing">Тарифы</a>
+                    <a href="#chat">Чат</a>
+                    <a href="#policy">Политика</a>
+                    <a href="#" class="glass-button" id="loginBtn">Войти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ГЛАВНЫЙ ЭКРАН (как в приложении) -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <div class="welcome-block">
+                        <div class="welcome-greeting" id="greetingText">Добрый день,</div>
+                        <div class="welcome-name">Пользователь!</div>
+                    </div>
+                    <div class="hero-title">
+                        Юридическая помощь <span>24/7</span> с ИИ
+                    </div>
+                    <div class="hero-desc">
+                        Lawy AI — твой персональный юридический ассистент. Консультации, документы, анализ законов РФ за секунды.
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#chat" class="green-button">Спросить у ИИ</a>
+                        <a href="#pricing" class="glass-button">Выбрать тариф</a>
+                    </div>
+                </div>
+                <div class="glass-card" style="padding: 32px; text-align: center;">
+                    <div style="font-size: 64px; margin-bottom: 16px;">⚖️</div>
+                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Нейроюрист</div>
+                    <div style="color: rgba(255,255,255,0.7);">Статьи УК РФ, ГК РФ, КоАП РФ — всё в одном месте</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ВОЗМОЖНОСТИ -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Что умеет Lawy AI</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-title">Юридические консультации</div>
+                    <div class="feature-desc">Задай любой вопрос — нейросеть ответит со ссылками на статьи законов РФ.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <div class="feature-title">Генерация документов</div>
+                    <div class="feature-desc">Иски, жалобы, договоры, претензии — готовые документы за минуту.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Мгновенные ответы</div>
+                    <div class="feature-desc">Без записи и ожидания. Помощь юриста 24/7.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Конфиденциальность</div>
+                    <div class="feature-desc">Ваши данные в безопасности. Никто не узнает о ваших вопросах.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТАРИФЫ -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Выбери свой тариф</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Бесплатный</div>
+                    <div class="pricing-price">0 ₽</div>
+                    <ul class="pricing-features">
+                        <li>5 запросов в день</li>
+                        <li>Базовая генерация</li>
+                        <li>Доступ к библиотеке</li>
+                    </ul>
+                    <button class="glass-button" onclick="alert('Для использования чата войдите или зарегистрируйтесь')">Начать</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="pricing-name">Премиум</div>
+                    <div class="pricing-price">399 ₽<span style="font-size: 14px;">/мес</span></div>
+                    <ul class="pricing-features">
+                        <li>Безлимитные запросы</li>
+                        <li>Режим «Reasoner»</li>
+                        <li>До 20 документов в месяц</li>
+                        <li>Приоритетная поддержка</li>
+                    </ul>
+                    <button class="green-button" onclick="alert('Оплата через ЮKassa — скоро')">Купить подписку</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">Документ под ключ</div>
+                    <div class="pricing-price">от 990 ₽</div>
+                    <ul class="pricing-features">
+                        <li>Готовый иск/жалоба</li>
+                        <li>Проверка AI</li>
+                        <li>Скачивание в Word</li>
+                    </ul>
+                    <button class="glass-button" onclick="alert('Оплата через ЮKassa — скоро')">Заказать</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЧАТ (как в приложении) -->
+    <section id="chat" class="chat-section">
+        <div class="container">
+            <h2 class="section-title">Задай вопрос нейросети</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot">Здравствуйте! Я — юридический ассистент Lawy AI. Задайте любой вопрос по законам РФ, и я помогу найти ответ со ссылками на статьи.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Напишите ваш вопрос..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                    <button class="chat-send" onclick="sendMessage()">Отправить</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <div class="footer">
+        <div class="container">
+            <p>Продолжая, вы соглашаетесь с <a href="#" id="policyLink" style="color: #C3E956;">Политикой конфиденциальности</a> и <a href="#" style="color: #C3E956;">Условиями использования</a>.</p>
+            <p style="margin-top: 16px;">© 2026 Lawy AI. Все права защищены.</p>
+        </div>
+    </div>
+
+    <script>
+        // Приветствие по времени суток
+        function getTimeBasedGreeting() {
+            const hour = new Date().getHours();
+            if (hour >= 0 && hour < 6) return "Доброй ночи";
+            if (hour >= 6 && hour < 12) return "Доброе утро";
+            if (hour >= 12 && hour < 18) return "Добрый день";
+            return "Добрый вечер";
+        }
+
+        document.getElementById('greetingText').innerText = getTimeBasedGreeting() + ',';
+
+        // Имитация ответа нейросети (пока без API)
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // Добавляем сообщение пользователя
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message user';
+            userMessageDiv.innerText = message;
+            messagesContainer.appendChild(userMessageDiv);
+
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Имитация загрузки
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.innerText = 'Печатает...';
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Имитация ответа (позже заменишь на реальный запрос к DeepSeek API)
+            setTimeout(() => {
+                messagesContainer.removeChild(typingDiv);
+                
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.className = 'message bot';
+                
+                let answer = 'Я — юридический ассистент. ';
+                if (message.toLowerCase().includes('кража')) {
+                    answer = 'Статья 158 УК РФ. Кража — тайное хищение чужого имущества. Наказание: штраф до 80 000 руб., лишение свободы до 2 лет.';
+                } else if (message.toLowerCase().includes('алименты')) {
+                    answer = 'Статья 81 СК РФ. Алименты на несовершеннолетних детей: 1/4 дохода на одного ребёнка, 1/3 — на двоих, 1/2 — на троих и более.';
+                } else {
+                    answer = 'Я ещё учусь. Для точного юридического ответа рекомендуем обратиться к профессиональному юристу. Но я могу помочь с формулировкой вашего вопроса.';
+                }
+                
+                botMessageDiv.innerText = answer;
+                messagesContainer.appendChild(botMessageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+        }
+
+        // Политика
+        document.getElementById('policyLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Политика конфиденциальности Lawy AI: Ваши данные не передаются третьим лицам. Все запросы обрабатываются конфиденциально.');
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Вход в личный кабинет будет доступен после запуска приложения в Google Play');
+        });
+    </script>
+</body>
+</html>
